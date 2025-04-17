@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios, { AxiosRequestConfig } from 'axios';
-
+import Cookies from 'js-cookie';;
 // Observe no trecho de código abaixo que o professor colocou a barra (/) no final do baseURL
 // Poderia tirar daqui e colocar no arquivo .env
 const axiosInstance = axios.create({
@@ -39,4 +39,39 @@ export const usePost = <T, P>(endpoint: string) => {
         }
     }
     return { data, loading, error, postData }
+}
+
+export const useGet = <T>(endpoint: string, config?: AxiosRequestConfig) => {
+    const [data, setData] = useState<T | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<number | null>(null);
+
+    // Implementação da lógica de requisição POST
+    const getData = async () => {
+        setLoading(true)
+        setError(null)
+
+        try {
+            const response = await axiosInstance({
+                url: endpoint,
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${Cookies.get('Authorization')}`,
+                    ...config?.headers
+                },
+                ...config
+            })
+            setData(response.data)
+            //Este e: any, significa que aceita qualquer tipo de tipagem
+        } catch (e: any) {
+            setError(e.response.status ?? 500)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    useEffect(() => {
+        getData()
+    }, [])
+    return { data, loading, error, getData }
 }

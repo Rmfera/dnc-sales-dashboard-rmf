@@ -22,4 +22,24 @@ margin-bottom: ${pxToRem(16)};
 .mb-2{
 margin-bottom: ${pxToRem(32)};
 }
+
+.skeleton-lading{
+animation: skeletonLoading 2s infinite alternate;
+}
+
+@keyframes skeletonLoading {
+from {
+background-color: ${(props) => props.theme.appSkeletonFrom}
+}
+to {
+background-color: ${(props) => props.theme.appSkeletonTo}
+}
+}
+
+.skeleton-loading-mh-1{
+min-height: ${pxToRem(175)};
+}
+.skeleton-loading-mh-2{
+min-height: ${pxToRem(400)};
+}
 `
