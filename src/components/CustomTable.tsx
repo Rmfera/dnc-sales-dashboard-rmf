@@ -8,6 +8,22 @@ const TableWrapper = styled.div`
   table {
     width: 100%;
     border-collapse: collapse;
+
+    .ellipsis {
+      display: block;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .ellipsis-sm {
+      width: ${pxToRem(300)};
+    }
+
+    .ellipsis-xs {
+      width: ${pxToRem(150)};
+    }
+
     th,
     td {
       height: ${pxToRem(48)};
