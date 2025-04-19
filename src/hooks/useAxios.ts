@@ -75,3 +75,66 @@ export const useGet = <T>(endpoint: string, config?: AxiosRequestConfig) => {
     }, [])
     return { data, loading, error, getData }
 }
+
+export const usePut = <T>(endpoint: string) => {
+    const [data, setData] = useState<T | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<number | null>(null);
+
+    // Implementação da lógica de requisição POST
+    const putData = async (putData: T, config?: AxiosRequestConfig) => {
+        setData(null)
+        setLoading(true)
+        setError(null)
+
+        try {
+            const response = await axiosInstance({
+                url: endpoint,
+                method: 'PUT',
+                data: putData,
+                headers: {
+                    'Authorization': `Bearer ${Cookies.get('Authorization')}`,
+                    'Content-Type': 'application/json',
+                    ...config?.headers
+                },
+                ...config
+            })
+            setData(response.data)
+            //Este e: any, significa que aceita qualquer tipo de tipagem
+        } catch (e: any) {
+            setError(e.response ?? 500)
+        } finally {
+            setLoading(false)
+        }
+    }
+    return { data, loading, error, putData }
+}
+
+export const useDelete = <T>(endpoint: string) => {
+    const [data, setData] = useState<T | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
+
+    // Implementação da lógica de requisição POST
+    const deleteData = async (config?: AxiosRequestConfig) => {
+        setData(null)
+        setLoading(true)
+        try {
+            const response = await axiosInstance({
+                url: endpoint,
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${Cookies.get('Authorization')}`,
+                    ...config?.headers
+                },
+                ...config
+            })
+            setData(response.data)
+            //Este e: any, significa que aceita qualquer tipo de tipagem
+        } catch (e: any) {
+            throw e.response?.status
+        } finally {
+            setLoading(false)
+        }
+    }
+    return { data, loading, deleteData }
+}
