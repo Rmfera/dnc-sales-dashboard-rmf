@@ -112,7 +112,7 @@ function Profile() {
         type: 'error',
       })
     }
-    // clearMessage()
+    clearMessage()
   }, [profileUpdateData, profileUpdateError])
   return (
     <>

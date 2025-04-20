@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
 });
 
 //Este T e P dentro dos símbolos <> quer dizer que vão receber tipagens e ainda diferentes uma da outra
-export const usePost = <T, P>(endpoint: string) => {
+export const usePost = <T, P>(endpoint: string, withAuth?: boolean) => {
     const [data, setData] = useState<T | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<number | null>(null);
@@ -20,15 +20,22 @@ export const usePost = <T, P>(endpoint: string) => {
         setError(null)
 
         try {
+            const headers = withAuth
+                ? {
+                    Authorization: `Bearer ${Cookies.get('Authorization')}`,
+                    'Content-Type': 'application/json',
+                    ...config?.headers,
+                }
+                : {
+                    'Content-Type': 'application/json',
+                    ...config?.headers
+                }
             const response = await axiosInstance({
                 url: endpoint,
                 method: 'POST',
                 data: postData,
-                headers: {
-                    'Content-Type': 'application/json',
-                    ...config?.headers
-                },
-                ...config
+                headers: headers,
+                ...config,
             })
             setData(response.data)
             //Este e: any, significa que aceita qualquer tipo de tipagem
@@ -56,7 +63,7 @@ export const useGet = <T>(endpoint: string, config?: AxiosRequestConfig) => {
                 url: endpoint,
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${Cookies.get('Authorization')}`,
+                    Authorization: `Bearer ${Cookies.get('Authorization')}`,
                     ...config?.headers
                 },
                 ...config
