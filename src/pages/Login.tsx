@@ -20,8 +20,15 @@ import { jwtExpirationDateConverter, pxToRem } from '@/utils'
 
 // TYPES
 import { DecodedJWT, MessageProps, LoginData, LoginPostData } from '@/types'
+
+// REDUX
+import { useSelector } from 'react-redux'
+import { RootState } from '@/redux'
 function Login() {
   const navigate = useNavigate()
+  const { email, message } = useSelector(
+    (state: RootState) => state.createProfile
+  )
   const inputs = [
     { type: 'email', placeholder: 'Email' },
     { type: 'password', placeholder: 'Senha' },
@@ -33,7 +40,8 @@ function Login() {
   const { formValues, formValid, handleChange } = useFormValidation(inputs)
 
   const handleMessage = (): MessageProps => {
-    if (!error) return { msg: '', type: 'success' }
+    // O trecho de código a seguir, ou seja, ?? quer dizer que se tiver mensagem mostra senão deixa vazio
+    if (!error) return { msg: message ?? '', type: 'success' }
     switch (error) {
       case 401:
         return {
@@ -69,6 +77,14 @@ function Login() {
     }
     if (Cookies.get('Authorization')) navigate('/home')
   }, [data, navigate])
+  useEffect(() => {
+    if (email) {
+      // Se tiver email vindo do redux, passa o valor do email vindo do redux para o formulário
+      // Aí já vai chamar o handleChange para validar o email para ver se ele está correto
+      handleChange(0, email)
+    }
+  }, [email])
+
   return (
     <>
       <Box>
