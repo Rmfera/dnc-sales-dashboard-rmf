@@ -1,3 +1,4 @@
+/* global cy */
 describe('Login Flow Correct Credentials', () => {
   beforeEach(() => {
     cy.visit('http://localhost:5173/')

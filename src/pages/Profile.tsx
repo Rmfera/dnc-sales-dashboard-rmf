@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { AppThemeContext } from '@/contexts/AppThemeContext'
 import Cookies from 'js-cookie'
@@ -94,7 +95,7 @@ function Profile() {
         window.location.href = '/'
       } catch (e) {
         alert(
-          'Não foi possível realizar a operação. Entre em contato com nosso suporte.'
+          `Não foi possível realizar a operação. Entre em contato com nosso suporte.(${e})`
         )
       }
     }

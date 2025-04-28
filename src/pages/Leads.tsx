@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { ChangeEvent, useState, useEffect } from 'react'
 
 // COMPONENTES)
@@ -66,7 +67,7 @@ function Leads() {
         getLeads()
       } catch (e) {
         alert(
-          'Não foi possível realizar a operação. Entre em contato com nosso suporte.'
+          `Não foi possível realizar a operação. Entre em contato com nosso suporte. (${e})`
         )
       }
     }
