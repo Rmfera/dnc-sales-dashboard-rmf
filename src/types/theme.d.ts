@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+// src/styles/types/theme.d.ts
+
+import 'styled-components' // Importando para estender a tipagem do styled-components
+
 export interface Theme {
   appBackground: string
   appColor: string
@@ -36,4 +41,9 @@ export interface Theme {
     subtitle: string
     success: string
   }
+}
+
+// Estende o DefaultTheme do styled-components para usar a interface Theme
+declare module 'styled-components' {
+  export interface DefaultTheme extends Theme {}
 }
