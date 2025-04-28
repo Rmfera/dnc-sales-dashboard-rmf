@@ -68,7 +68,7 @@ function Home() {
                 >
                   {!highlightsLoading && highlightsData && (
                     <>
-                      <StyledH2 className="mb-1">
+                      <StyledH2 className="mb-1" id="total-sales-title">
                         Total de vendas no mês
                       </StyledH2>
                       <StyledH3 size={40} lineheight={40}>

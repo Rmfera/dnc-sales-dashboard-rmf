@@ -1,20 +1,25 @@
-import { defineConfig } from 'vite'
-import tsconfigPaths from 'vite-tsconfig-paths'
-import react from '@vitejs/plugin-react'
-import path from 'path'
-
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [react(), tsconfigPaths()],
-  optimizeDeps: {
-    include: ['@emotion/styled'],
+module.exports = {
+  env: {
+    browser: true,             // Definir como ambiente do navegador
+    'cypress/globals': true,   // Permitir o uso das variáveis globais do Cypress (como 'cy')
   },
-  server: {
-    host: true
+  extends: [
+    'eslint:recommended',      // Regras recomendadas do ESLint
+    'plugin:cypress/recommended',  // Regras recomendadas para Cypress
+  ],
+  plugins: ['cypress'],       // Adicionar o plugin do Cypress
+  overrides: [
+    {
+      files: ['**/*.cy.{js,ts,jsx,tsx}'],  // Aplica a configuração a arquivos com essas extensões
+      env: {
+        'cypress/globals': true, // Habilitar as variáveis globais do Cypress nesses arquivos
+      },
+      rules: {
+        'no-undef': 'off',  // Desativar a regra 'no-undef' nesses arquivos
+      },
+    },
+  ],
+  rules: {
+    // Outras regras personalizadas
   },
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    }
-  }
-})
+};

@@ -1,3 +1,4 @@
+/* global cy */
 describe('Check if create profile page renders the correct components', () => {
   beforeEach(() => {
     cy.login('tester_cypress@dnc.com.br', '@DNCReact178#')
