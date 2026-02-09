@@ -1,50 +1,73 @@
-# React + TypeScript + Vite
+# 📊 Sales Dashboard - DNC
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é um projeto de Dashboard de Vendas de alto nível, desenvolvido com React 19, TypeScript e Vite. A aplicação foca na visualização de dados complexos através de gráficos interativos, gerenciamento de estado global com Redux e uma arquitetura robusta preparada para testes automatizados.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Tecnologias e Ferramentas
 
-## Expanding the ESLint configuration
+### Core do Front-end
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React 19 & TypeScript: Interface moderna com tipagem estática para maior segurança.
+- Vite: Ferramenta de build de última geração para performance máxima.
+- React Router Dom 7: Sistema de rotas dinâmicas e proteção de páginas.
 
-- Configure the top-level `parserOptions` property like this:
+### Estado e Dados
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- Redux Toolkit: Gerenciamento centralizado do estado da aplicação.
+- Axios: Integração e consumo de APIs REST.
+- JWT Decode & JS-Cookie: Controle de autenticação, decodificação de tokens e persistência.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Interface e Gráficos
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- Chart.js & React-Chartjs-2: Renderização de gráficos de performance (Barras, Pizza, Linhas).
+- Material UI (MUI) & Styled Components: Estilização baseada em componentes e Design System profissional.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+---
+
+## 🚀 Guia de Comandos
+
+Abaixo estão todos os comandos necessários para instalar, rodar e testar o projeto localmente:
+
+### 1. Preparação Inicial
+
+Para instalar todas as dependências necessárias listadas no package.json, utilize o comando: npm install
+
+### 2. Execução (Ambiente de Desenvolvimento)
+
+Para iniciar o servidor local com Hot Module Replacement (HMR), utilize o comando: npm run dev
+
+### 3. Qualidade de Código (Lint & Formatação)
+
+Para garantir que o código siga os padrões de escrita e evitar erros comuns:
+Para verificar erros de Lint, utilize: npm run lint
+Para formatar automaticamente os arquivos com Prettier, utilize: npm run format
+
+### 4. Testes Automatizados
+
+O projeto conta com uma suíte completa de testes (Unitários e E2E):
+Para Jest (Unitários) e relatório de cobertura, utilize: npm run test
+Para Cypress (E2E) via interface, utilize: npm run cypress:open
+Para Cypress (E2E) via terminal, utilize: npm run cypress:run
+
+### 5. Build e Produção
+
+Para gerar a versão final otimizada para hospedagem (Vercel/Netlify), utilize o comando: npm run build
+
+---
+
+## 📝 Observações Importantes
+
+### Sobre a API
+
+O projeto foi desenvolvido para integrar-se a uma API educacional da Escola DNC. Se a API estiver offline, a aplicação ainda serve como uma demonstração sólida de Engenharia de Front-end, evidenciando o tratamento de estados de carregamento (Loading) e erro, a lógica de tratamento de dados para componentes visuais e o fluxo de segurança e login.
+
+### Automação com Husky
+
+Este repositório utiliza Husky para hooks de commit, garantindo que os testes e o lint sejam verificados automaticamente antes de qualquer envio de código, mantendo a estabilidade do projeto.
+
+---
+
+## 👤 Autor
+
+Desenvolvido por Reina (Rmfera).
