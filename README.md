@@ -70,4 +70,4 @@ Este repositório utiliza Husky para hooks de commit, garantindo que os testes e
 
 ## 👤 Autor
 
-Desenvolvido por Reina (Rmfera).
+Desenvolvido por Reinaldo M. Ferreira (Rmfera).
